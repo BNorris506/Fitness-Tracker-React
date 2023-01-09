@@ -213,5 +213,47 @@ export const deleteRoutine = async (token, routineId) => {
   .catch(console.error);
 }
 
+//**** We were here
+
 // POST /api/routines/:routineId/activities
-export const create
+export const attachActivityToRoutine = async (routineId, activityId, count, duration) => {
+ fetch(`http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}/activities`, {
+  method: "POST",
+  body: JSON.stringify({
+    Activity: {activityId, count, duration}
+  })
+}).then(response => response.json())
+  .then(result => {
+    console.log(result);
+  })
+  .catch(console.error);
+}
+
+// PATCH /api/routine_activities/:routineActivityId (**)
+export const updateRoutineActivity = async (routineActivityId, count, duration) => {
+    fetch(`http://fitnesstrac-kr.herokuapp.com/api/api/routine_activities/${routineActivityId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          Routine_Activity: {count, duration}
+        })
+      }).then(response => response.json())
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.error);
+}
+
+// DELETE /api/routine_activities/:routineActivityId (**)
+export const deleteRoutineActivity = async (routineActivityId, token) => {
+    fetch(`http://fitnesstrac-kr.herokuapp.com/api/routine_activities/${routineActivityId}`, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }).then(response => response.json())
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.error);
+}
