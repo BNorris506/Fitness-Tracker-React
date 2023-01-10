@@ -49,6 +49,7 @@ export const loginUser = async (username, password) => {
         console.log(error);
     }
 };
+
 export const fetchMe = async (token) => {
   try {
     const response = await fetch ('http://fitnesstrac-kr.herokuapp.com/api/users/me', 
@@ -145,16 +146,27 @@ export const getRoutineByActivityId = async (activityId) => {
 }
 
 // GET /api/routines
+// export const getRoutines = async () => {
+//     fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   }).then(response => response.json())
+//     .catch(console.error);
+// }
+
 export const getRoutines = async () => {
-    fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
+  try{
+   const response = await fetch('http://fitnesstrac-kr.herokuapp.com/api/routines', {
     headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then(response => response.json())
-    .then(result => {
-      console.log(result);
-    })
-    .catch(console.error);
+    'Content-Type': 'application/json',
+  },
+});
+const result = await response.json();
+return result;
+} catch (error) {
+    console.log(error);
+}
 }
 
 // POST /api/routines (*)

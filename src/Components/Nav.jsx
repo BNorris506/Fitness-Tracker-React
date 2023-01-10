@@ -15,8 +15,9 @@ export const Nav = ({ userData }) => {
       <Link to="/">Home</Link>
       <Link to="/login">Log In</Link>
       <Link to="/register">Register</Link>
-      <Link to="/userinfo">Routines and Activities</Link>
-      <Link to="/createactivity">Activity+</Link>
+      <Link to="/routines">Routines</Link>
+      <Link to="/activities">Activities</Link>
+      <Link to="/my_routines">My Routines</Link>
     </div>
   );
 };

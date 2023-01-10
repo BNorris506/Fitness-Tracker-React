@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { loginUser } from "../../api/auth";
-
-export const LogIn = ({ setToken }) => {
+import { loginUser } from "../api/auth";
+const LogIn = ({ setToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -43,3 +42,5 @@ export const LogIn = ({ setToken }) => {
     </div>
   );
 };
+
+export default LogIn;

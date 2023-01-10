@@ -1,58 +1,50 @@
 import "./app.css";
-// import FetchPosts from "./src/Components/FetchPosts";
 import React, { useState, useEffect } from "react";
-// import { PostsView } from "./src/Components/PostsView";
-// import Register from "./Components/Register";
-// import { fetchMe } from "../api/auth";
-// import { LogIn } from "./src/Components/LoginOut";
-// import { NewPostForm } from "./src/Components/NewPost";
-// import { UserInfo } from "./Components/UserInfo";
-// import { Nav } from "./Components/Nav";
+import Register from "./Components/Register";
+import Welcome from "./Components/Welcome";
+import Routines from "./Components/Routines";
+import MyRoutines from "./Components/MyRoutines";
+import Activities from "./Components/Activities";
+import ErrorComponent from "./Components/ErrorComponent";
+import LogIn from "./Components/LogIn";
+import { fetchMe } from "./api/auth";
 import { Route, Routes } from "react-router-dom";
 
-function App(props) {
-  return <div>Hello World</div>;
+function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    const getMe = async () => {
+      const data = await fetchMe(token);
+      setUser(data);
+    };
+    if (token) {
+      getMe();
+    }
+  }, [token]);
+
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/login" element={<LogIn setToken={setToken} />}></Route>
+        <Route
+          path="/register"
+          element={<Register setToken={setToken} />}
+        ></Route>
+        <Route path="/routines" element={<Routines />}></Route>
+        <Route
+          path="/my_routines"
+          element={<MyRoutines setToken={setToken} />}
+        ></Route>
+        <Route path="/activities" element={<Activities />}></Route>
+        <Route path="*" element={<ErrorComponent />}>
+          {" "}
+        </Route>
+      </Routes>
+    </div>
+  );
 }
 
-// function App() {
-//   const [posts, setPost] = useState([]);
-//   const [token, setToken] = useState(localStorage.getItem("token"));
-//   const [userData, setUserData] = useState({});
-
-//   useEffect(() => {
-//     FetchPosts(setPost);
-//   }, []);
-
-//   useEffect(() => {
-//     const getMe = async () => {
-//       const data = await fetchMe(token);
-//       setUserData(data);
-//     };
-//     if (token) {
-//       getMe();
-//     }
-//   }, [token]);
-
-//   return (
-//     <div className="App">
-//       <Nav userData={userData} post={posts}></Nav>
-//       <Routes>
-//         <Route path="/Login" element={<LogIn setToken={setToken} />}></Route>
-//         <Route
-//           path="/Register"
-//           element={<Register setToken={setToken} />}
-//         ></Route>
-//         <Route
-//           path="/"
-//           element={<RoutineActivities posts={posts} token={token} />}
-//         ></Route>
-//         <Route
-//           path="/Routines"
-//           element={<UserInfo userData={userData} token={token} />}
-//         ></Route>
-//         <Route path="/Activities" element={<Activity token={token} />}></Route>
-//       </Routes>
-//     </div>
-//   );
-// }
 export default App;
