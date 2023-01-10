@@ -40,16 +40,13 @@ function App() {
         ></Route>
         <Route
           path="/"
-          element={<PostsView posts={posts} token={token} />}
+          element={<RoutineActivities posts={posts} token={token} />}
         ></Route>
         <Route
-          path="/UserInfo"
+          path="/Routines"
           element={<UserInfo userData={userData} token={token} />}
         ></Route>
-        <Route
-          path="/createpost"
-          element={<NewPostForm token={token} />}
-        ></Route>
+        <Route path="/Activities" element={<Activity token={token} />}></Route>
       </Routes>
     </div>
   );
