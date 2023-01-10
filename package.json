@@ -2,15 +2,17 @@
   "name": "fitnesstracker_frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "main.jsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "create-react-app": "^5.0.1",
     "nodemon": "^2.0.20",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-router-dom": "^6.6.2"
   }
 }
