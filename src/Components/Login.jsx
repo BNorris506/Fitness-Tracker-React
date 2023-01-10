@@ -1,18 +1,24 @@
-import React, { useState } from "react";
-import { registerUser } from "../api/auth";
+import React from "react";
+import { useState } from "react";
+import { loginUser } from "../../api/auth";
 
-const Register = ({ setToken }) => {
+export const LogIn = ({ setToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <div>
       <form
-        onSubmit={async (e) => {
+        onSubmit={async (event) => {
           try {
-            e.preventDefault();
-            const token = await registerUser(username, password);
+            event.preventDefault();
+            const token = await loginUser(username, password);
             setToken(token);
             localStorage.setItem("token", token);
+            const redirHome = () => {
+              window.location.href = "/";
+            };
+            redirHome();
           } catch (error) {
             console.error(error);
           }
@@ -23,19 +29,17 @@ const Register = ({ setToken }) => {
           value={username}
           type="text"
           placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(event) => setUsername(event.target.value)}
         ></input>
         <input
           name="password"
           value={password}
-          type="password"
+          type="text"
           placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
         ></input>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 };
-
-export default Register;
