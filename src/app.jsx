@@ -8,11 +8,13 @@ import Activities from "./Components/Activities";
 import ErrorComponent from "./Components/ErrorComponent";
 import LogIn from "./Components/LogIn";
 import { fetchMe } from "./api/auth";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Users from "./Components/Users";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMe = async () => {
@@ -24,21 +26,25 @@ function App() {
     }
   }, [token]);
 
+  const isLoggedIn = () => {
+    token ? navigate("/Users") : navigate("/");
+  };
+  useEffect(() => {
+    isLoggedIn();
+  }, [token]);
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/" element={<Welcome setToken={setToken} />}></Route>
         <Route path="/login" element={<LogIn setToken={setToken} />}></Route>
         <Route
           path="/register"
           element={<Register setToken={setToken} />}
         ></Route>
         <Route path="/routines" element={<Routines />}></Route>
-        <Route
-          path="/my_routines"
-          element={<MyRoutines setToken={setToken} />}
-        ></Route>
+        <Route path="/my_routines" element={<MyRoutines user={user} />}></Route>
         <Route path="/activities" element={<Activities />}></Route>
+        <Route path="/Users" element={<Users user={user} />}></Route>
         <Route path="*" element={<ErrorComponent />}>
           {" "}
         </Route>

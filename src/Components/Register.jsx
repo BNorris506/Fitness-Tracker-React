@@ -6,6 +6,7 @@ const Register = ({ setToken }) => {
   const [password, setPassword] = useState("");
   return (
     <div>
+      <h1>We Can't Wait To See You</h1>
       <form
         onSubmit={async (e) => {
           try {
@@ -34,6 +35,12 @@ const Register = ({ setToken }) => {
         ></input>
         <button type="submit">Register</button>
       </form>
+      <h3>Benefits of Membership</h3>
+      <ul>
+        <li>Keep track of your progress</li>
+        <li>Make your own activities</li>
+        <li>Keep yourself accountable to your goals</li>
+      </ul>
     </div>
   );
 };

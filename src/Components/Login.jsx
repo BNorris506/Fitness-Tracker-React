@@ -15,7 +15,7 @@ const LogIn = ({ setToken }) => {
             setToken(token);
             localStorage.setItem("token", token);
             const redirHome = () => {
-              window.location.href = "/";
+              window.location.href = "/Users";
             };
             redirHome();
           } catch (error) {

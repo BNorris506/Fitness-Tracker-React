@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { getRoutines } from "../api/auth";
+import { getRoutines, getRoutinesByUsername } from "../api/auth";
 
-const MyRoutines = () => {
-  const [routines, setRoutines] = useState([]);
-  setRoutines(getRoutines());
-  const myRoutines = routines.filter((routine) => {
-    routine.creatorId = user.id;
-  });
+const MyRoutines = ({ user }) => {
+  const [myRoutines, setMyRoutines] = useState([]);
+
+  useEffect(() => {
+    const myRoutinesArr = async () => {
+      const data = await getRoutinesByUsername(user.username);
+      setMyRoutines(data);
+    };
+    myRoutinesArr();
+  }, []);
+  console.log("My routines:", myRoutines);
   return (
     <div>
-      <div className="routine_list">
-        <p>Name: {myRoutines.name}</p>
-        <p>Goal: {myRoutines.goal}</p>
+      <div className="myroutine_list">
+        {myRoutines.map((routine) => (
+          <div>
+            <p>Name: {routine.name}</p>
+            <p>Goal: {routine.goal}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -16,7 +16,12 @@ const Welcome = ({ setToken }) => {
             // use loginUser to go to API and pull token if you are already registered user
             const token = await loginUser(username, password);
             setToken(token);
+            console.log("This is the token:", token);
             localStorage.setItem("token", token);
+            // const redirHome = () => {
+            //   window.location.href = "/Users";
+            // };
+            // redirHome();
           } catch (error) {
             console.error(error);
           }
@@ -42,13 +47,13 @@ const Welcome = ({ setToken }) => {
             setPassword(e.target.value);
           }}
         ></input>
-        <button type="submit">Login Existing User</button>
+        <button type="submit">Log In</button>
       </form>
       <div className="links">
         <Link to="/register">
           New users, click here to setup your new account!
         </Link>
-        <Link to="/guest">Continue as guest</Link>
+        <Link to="/routines">Continue as guest</Link>
       </div>
     </div>
   );
