@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getActivities } from "../api/auth";
+import { getActivities } from "../../api/auth";
 import { Link } from "react-router-dom";
 
-const Activities = () => {
+const GuestActivities = () => {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Activities = () => {
     <div>
       <h1>Here are the activities</h1>
       <h2>Let's get pumpin'!</h2>
-      <Link to="/Users">Home</Link>
+      <Link to="/guest">Home</Link>
       {activities.map((activity) => (
         <div key={activity.id} className="activity_list">
           <p>Name: {activity.name}</p>
@@ -28,4 +28,4 @@ const Activities = () => {
   );
 };
 
-export default Activities;
+export default GuestActivities;

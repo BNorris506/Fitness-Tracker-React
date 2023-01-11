@@ -10,6 +10,10 @@ import LogIn from "./Components/LogIn";
 import { fetchMe } from "./api/auth";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Users from "./Components/Users";
+import NewRoutineForm from "./Components/NewRoutine";
+import GuestRoutines from "./Components/Guest/GuestRoutines";
+import GuestActivities from "./Components/Guest/GuestActivities";
+import GuestHome from "./Components/Guest/GuestHome";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -45,6 +49,13 @@ function App() {
         <Route path="/my_routines" element={<MyRoutines user={user} />}></Route>
         <Route path="/activities" element={<Activities />}></Route>
         <Route path="/Users" element={<Users user={user} />}></Route>
+        <Route
+          path="/newRoutine"
+          element={<NewRoutineForm token={token} />}
+        ></Route>
+        <Route path="/guest" element={<GuestHome />}></Route>
+        <Route path="/guestRoutines" element={<GuestRoutines />}></Route>
+        <Route path="/guestActivities" element={<GuestActivities />}></Route>
         <Route path="*" element={<ErrorComponent />}>
           {" "}
         </Route>

@@ -53,7 +53,7 @@ const Welcome = ({ setToken }) => {
         <Link to="/register">
           New users, click here to setup your new account!
         </Link>
-        <Link to="/routines">Continue as guest</Link>
+        <Link to="/guest">Continue as guest</Link>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Users = ({ user }) => {
   const [routines, setRoutines] = useState([]);
-  console.log("This is the user:", user);
+  // console.log("This is the user:", user);
 
   const logout = () => {
     localStorage.clear();
@@ -18,7 +18,7 @@ const Users = ({ user }) => {
     };
     routinesArr();
   }, []);
-  console.log("I'm the routines:", routines);
+  // console.log("I'm the routines:", routines);
 
   return (
     <div className="routine_list">
@@ -28,13 +28,6 @@ const Users = ({ user }) => {
       <Link to="/activities">Activities</Link>
       <Link to="/routines">Routines</Link>
       <button onClick={logout}>Log out</button>
-      {routines.map((routine) => (
-        <div>
-          <p>Name: {routine.name}</p>
-          <p>Goal: {routine.goal}</p>
-          <p>Creator Name: {routine.creatorName}</p>
-        </div>
-      ))}
     </div>
   );
 };

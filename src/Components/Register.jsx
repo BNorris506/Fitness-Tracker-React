@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { registerUser } from "../api/auth";
+import { Link } from "react-router-dom";
 
 const Register = ({ setToken }) => {
   const [username, setUsername] = useState("");
@@ -35,6 +36,7 @@ const Register = ({ setToken }) => {
         ></input>
         <button type="submit">Register</button>
       </form>
+      <Link to="/guest">Continue as guest</Link>
       <h3>Benefits of Membership</h3>
       <ul>
         <li>Keep track of your progress</li>
