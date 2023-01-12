@@ -70,9 +70,10 @@ export const fetchMe = async (token) => {
 export const getRoutinesByUsername = async (username) => {
   try {
     const response = await fetch(
-      `http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`, {
+      `http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`,
+      {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
@@ -195,7 +196,7 @@ export const getRoutines = async () => {
 
 // POST /api/routines (*)
 // !Double check here
-export const createRoutine = async ({token, name, goal, isPublic}) => {
+export const createRoutine = async ({ token, name, goal, isPublic }) => {
   try {
     const response = await fetch(
       "http://fitnesstrac-kr.herokuapp.com/api/routines",
@@ -213,7 +214,7 @@ export const createRoutine = async ({token, name, goal, isPublic}) => {
       }
     );
     const result = await response.json();
-    console.log("This is the result in auth.js", result)
+    console.log("This is the result in auth.js", result);
     return result;
   } catch (error) {
     console.log(error);
@@ -252,7 +253,7 @@ export const patchRoutine = async (token, name, goal, isPublic, routineId) => {
 
 export const deleteRoutine = async (token, routineId) => {
   try {
-    const response = awaitfetch(
+    const response = await fetch(
       `http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}`,
       {
         method: "DELETE",

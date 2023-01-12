@@ -8,7 +8,7 @@ const NewRoutineForm = ({ token }) => {
 
   return (
     <div>
-      <h1>New Routine</h1>
+      <h3>Make a new routine</h3>
       <form
         onSubmit={async (e) => {
           try {
@@ -44,7 +44,7 @@ const NewRoutineForm = ({ token }) => {
         ></input>
 
         <br></br>
-        <p>is public? (Warning: ONLY public comments will be visible)</p>
+        <p>is public?</p>
         <input
           name="isPublic"
           value={isPublic}
