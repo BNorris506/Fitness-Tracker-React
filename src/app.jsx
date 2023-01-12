@@ -29,14 +29,14 @@ function App() {
     if (token) {
       getMe();
     }
-  }, [token]);
+  }, []);
 
-  const isLoggedIn = () => {
-    token ? navigate("/Users") : navigate("/");
-  };
-  useEffect(() => {
-    isLoggedIn();
-  }, [token]);
+  // const isLoggedIn = () => {
+  //   token ? navigate("/Users") : navigate("/");
+  // };
+  // useEffect(() => {
+  //   isLoggedIn();
+  // }, [token]);
   return (
     <div>
       <Routes>
@@ -53,10 +53,6 @@ function App() {
         ></Route>
         <Route path="/activities" element={<Activities />}></Route>
         <Route path="/Users" element={<Users user={user} />}></Route>
-        <Route
-          path="/newRoutine"
-          element={<NewRoutineForm token={token} />}
-        ></Route>
         <Route path="/create_activity" element={<CreateActivity />}></Route>
         <Route path="/guest" element={<GuestHome />}></Route>
         <Route path="/guestRoutines" element={<GuestRoutines />}></Route>

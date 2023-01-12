@@ -69,6 +69,7 @@ export const fetchMe = async (token) => {
 
 export const getRoutinesByUsername = async (username) => {
   try {
+    console.log("I'm auth.js username", username)
     const response = await fetch(
       `http://fitnesstrac-kr.herokuapp.com/api/users/${username}/routines`,
       {
@@ -195,9 +196,9 @@ export const getRoutines = async () => {
 };
 
 // POST /api/routines (*)
-// !Double check here
 export const createRoutine = async ({ token, name, goal, isPublic }) => {
   try {
+    console.log("this is isPublic", isPublic)
     const response = await fetch(
       "http://fitnesstrac-kr.herokuapp.com/api/routines",
       {
@@ -214,7 +215,6 @@ export const createRoutine = async ({ token, name, goal, isPublic }) => {
       }
     );
     const result = await response.json();
-    console.log("This is the result in auth.js", result);
     return result;
   } catch (error) {
     console.log(error);

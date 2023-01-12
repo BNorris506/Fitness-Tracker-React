@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { createRoutine, getRoutines, getRoutinesByUsername } from "../api/auth";
+import { getRoutinesByUsername } from "../api/auth";
 import { Link } from "react-router-dom";
-import NewRoutineForm from "./NewRoutine";
+import NewRoutineForm from "../Components/NewRoutine";
 import { deleteRoutine } from "../api/auth";
 import { patchRoutine } from "../api/auth";
-import Routines from "../Components/Routines";
 
 const MyRoutines = ({ user, token }) => {
   const [myRoutines, setMyRoutines] = useState([]);
+  const [routineId, setRoutineId] = useState("");
 
   useEffect(() => {
     const myRoutinesArr = async () => {
       const data = await getRoutinesByUsername(user.username);
-      setMyRoutines(data);
+      if (data) {
+        setMyRoutines(data);
+      }
     };
     myRoutinesArr();
-  }, []);
-  console.log("My routines:", myRoutines);
+  }, [user]);
+  // console.log("My routines:", myRoutines);
 
   const deleteThis = async (routineId) => {
     const result = await deleteRoutine(token, routineId);
@@ -29,20 +31,35 @@ const MyRoutines = ({ user, token }) => {
   };
 
   const editThis = async (token, name, goal, isPublic, routineId) => {
-    const edit = await patchRoutine(token, name, goal, isPublic, routineId);
+    const data = await patchRoutine(token, name, goal, isPublic, routineId);
+    if (data && data.name) {
+      const myEditedPost = myRoutines.map((routine) => {
+        if (routine.id === routineId) {
+          return data;
+        } else {
+          return routine;
+        }
+      });
+      setMyRoutines(myEditedPost);
+    }
   };
 
   return (
     <div>
       <h1>My Routines</h1>
-      <NewRoutineForm />
+      <NewRoutineForm
+        token={token}
+        myRoutines={myRoutines}
+        setMyRoutines={setMyRoutines}
+        user={user}
+      />
       <Link to="/Users">Home</Link>
       <Link to="/activities">Activities</Link>
       <Link to="/routines">Routines</Link>
       <div className="myroutine_list">
         {myRoutines.map((routine) => (
           <div key={routine.id}>
-            {console.log("This is routine:", routine)}
+            {/* {console.log("This is routine:", routine)} */}
             <p>Name: {routine.name}</p>
             <p>Goal: {routine.goal}</p>
             <p>Activities: {routine.activities}</p>

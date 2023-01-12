@@ -1,30 +1,32 @@
-import React, { useState } from "react";
-import { createRoutine } from "../api/auth";
+import React, { useState, useEffect } from "react";
+import { createRoutine, getRoutinesByUsername } from "../api/auth";
 
-const NewRoutineForm = ({ token }) => {
+const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const newRoutine = await createRoutine({
+        name,
+        goal,
+        isPublic,
+        token,
+      });
+      setName("");
+      setGoal("");
+      setMyRoutines([newRoutine, ...myRoutines]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <h3>Make a new routine</h3>
-      <form
-        onSubmit={async (e) => {
-          try {
-            e.preventDefault();
-            const newRoutine = await createRoutine({
-              name,
-              goal,
-              isPublic,
-              token,
-            });
-            window.location.href = "/my_routines";
-          } catch (error) {
-            console.error(error);
-          }
-        }}
-      >
+      <form onSubmit={(e) => handleSubmit(e)}>
         <input
           name="name"
           value={name}
