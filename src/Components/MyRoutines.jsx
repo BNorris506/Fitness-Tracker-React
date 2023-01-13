@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getRoutinesByUsername } from "../api/auth";
+import { getRoutines, getRoutinesByUsername } from "../api/auth";
 import { Link } from "react-router-dom";
 import NewRoutineForm from "../Components/NewRoutine";
 import { deleteRoutine } from "../api/auth";
 import { patchRoutine } from "../api/auth";
+import UpdateRoutineForm from "./UpdateRoutine";
 
 const MyRoutines = ({ user, token }) => {
   const [myRoutines, setMyRoutines] = useState([]);
@@ -30,6 +31,24 @@ const MyRoutines = ({ user, token }) => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const getTheId = () => {};
+      const updateRoutine = await getRoutines({
+        name,
+        goal,
+        isPublic,
+        token,
+      });
+      setName("");
+      setGoal("");
+      setMyRoutines([newRoutine, ...myRoutines]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const editThis = async (token, name, goal, isPublic, routineId) => {
     const data = await patchRoutine(token, name, goal, isPublic, routineId);
     if (data && data.name) {
@@ -47,12 +66,16 @@ const MyRoutines = ({ user, token }) => {
   return (
     <div>
       <h1>My Routines</h1>
-      <NewRoutineForm
-        token={token}
-        myRoutines={myRoutines}
-        setMyRoutines={setMyRoutines}
-        user={user}
-      />
+      {routineId ? (
+        <UpdateRoutineForm token={token} routineId={routineId} />
+      ) : (
+        <NewRoutineForm
+          token={token}
+          myRoutines={myRoutines}
+          setMyRoutines={setMyRoutines}
+          user={user}
+        />
+      )}
       <Link to="/Users">Home</Link>
       <Link to="/activities">Activities</Link>
       <Link to="/routines">Routines</Link>
@@ -64,7 +87,8 @@ const MyRoutines = ({ user, token }) => {
             <p>Goal: {routine.goal}</p>
             <p>Activities: {routine.activities}</p>
             <button onClick={() => deleteThis(routine.id)}>Delete</button>
-            <button onClick={() => editThis}>Edit</button>
+            <button onClick={() => setRoutineId(routine.id)}>Edit</button>
+            <button onClick={() => addActivity}>Add Activity</button>
             <br></br>
           </div>
         ))}

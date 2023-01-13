@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { createRoutine } from "../api/auth";
+import { createRoutine, patchRoutine } from "../api/auth";
 
-const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
+const UpdateRoutineForm = ({ token, routineId, myRoutines, setMyRoutines }) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -9,15 +9,16 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const newRoutine = await createRoutine({
+      const updatedRoutine = await patchRoutine(
+        token,
         name,
         goal,
         isPublic,
-        token,
-      });
+        routineId
+      );
       setName("");
       setGoal("");
-      setMyRoutines([newRoutine, ...myRoutines]);
+      setMyRoutines([updatedRoutine, ...myRoutines]);
     } catch (error) {
       console.error(error);
     }
@@ -57,10 +58,10 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
 
         <br></br>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Edit</button>
       </form>
     </div>
   );
 };
 
-export default NewRoutineForm;
+export default UpdateRoutineForm;

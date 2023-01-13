@@ -28,15 +28,14 @@ function App() {
     };
     if (token) {
       getMe();
+      (async () => {
+        const data = await fetchMe(token);
+        setUser(data);
+        navigate("/Users");
+      })();
     }
   }, []);
 
-  // const isLoggedIn = () => {
-  //   token ? navigate("/Users") : navigate("/");
-  // };
-  // useEffect(() => {
-  //   isLoggedIn();
-  // }, [token]);
   return (
     <div>
       <Routes>
@@ -51,7 +50,10 @@ function App() {
           path="/my_routines"
           element={<MyRoutines user={user} token={token} />}
         ></Route>
-        <Route path="/activities" element={<Activities />}></Route>
+        <Route
+          path="/activities"
+          element={<Activities token={token} />}
+        ></Route>
         <Route path="/Users" element={<Users user={user} />}></Route>
         <Route path="/create_activity" element={<CreateActivity />}></Route>
         <Route path="/guest" element={<GuestHome />}></Route>

@@ -1,30 +1,38 @@
 import React from "react";
 import { useState } from "react";
 import { loginUser } from "../api/auth";
+import { useNavigate } from "react-router-dom";
+
 const LogIn = ({ setToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [testPassword, setTestPassword] = useState("");
+  const navigate = useNavigate();
 
   return (
     <div>
       <form
         onSubmit={async (event) => {
-          try {
-            event.preventDefault();
-            const token = await loginUser(username, password);
-            setToken(token);
-            localStorage.setItem("token", token);
-            const redirHome = () => {
-              window.location.href = "/Users";
-            };
-            redirHome();
-          } catch (error) {
-            console.error(error);
+          if (password === testPassword) {
+            try {
+              event.preventDefault();
+              const token = await loginUser(username, password);
+              console.log("Login stuff", username, password, token);
+              setToken(token);
+              localStorage.setItem("token", token);
+              navigate("/Users");
+            } catch (error) {
+              console.error(error);
+            }
+          } else {
+            alert("You wrong sucka");
+            return;
           }
         }}
       >
         <input
           name="username"
+          required
           value={username}
           type="text"
           placeholder="username"
@@ -32,10 +40,23 @@ const LogIn = ({ setToken }) => {
         ></input>
         <input
           name="password"
+          required
           value={password}
-          type="text"
+          type="password"
           placeholder="password"
+          minLength="8"
+          maxLength="12"
           onChange={(event) => setPassword(event.target.value)}
+        ></input>
+        <input
+          name="password"
+          required
+          value={testPassword}
+          type="password"
+          placeholder="confirmPassword"
+          minLength="8"
+          maxLength="12"
+          onChange={(event) => setTestPassword(event.target.value)}
         ></input>
         <button type="submit">Login</button>
       </form>

@@ -36,6 +36,17 @@ const Routines = ({ token }) => {
           <p>Name: {routine.name}</p>
           <p>Goal: {routine.goal}</p>
           <p>Creator Name: {routine.creatorName}</p>
+          {routine.activities.map((activity) => (
+            <div key={activity.id}>
+              <p>
+                <strong>Activity</strong>
+              </p>
+              <p>Name: {activity.name}</p>
+              <p>Description: {activity.description}</p>
+              <p>Count: {activity.count}</p>
+              <p>Duration: {activity.duration}</p>
+            </div>
+          ))}
           <p>
             <button onClick={() => addThis(routine.id)}>Add Routine</button>
           </p>

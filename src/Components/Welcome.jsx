@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { loginUser } from "../api/auth";
+import LogIn from "./LogIn";
 
 const Welcome = ({ setToken }) => {
   const [username, setUsername] = useState("");
@@ -9,7 +10,7 @@ const Welcome = ({ setToken }) => {
   return (
     // return the login screen with a register component/redirect for new user registration if clicked
     <div>
-      <form
+      {/* <form
         onSubmit={async (e) => {
           try {
             e.preventDefault();
@@ -26,10 +27,11 @@ const Welcome = ({ setToken }) => {
             console.error(error);
           }
         }}
-      >
-        <h1>Welcome</h1>
-        <h2> to Fitness Tracker</h2>
-        <input
+      > */}
+      <h1>Welcome</h1>
+      <h2> to Fitness Tracker</h2>
+      <LogIn setToken={setToken} />
+      {/* <input
           type="text"
           value={username}
           placeholder="Username"
@@ -48,7 +50,7 @@ const Welcome = ({ setToken }) => {
           }}
         ></input>
         <button type="submit">Log In</button>
-      </form>
+      </form> */}
       <div className="links">
         <Link to="/register">
           New users, click here to setup your new account!
