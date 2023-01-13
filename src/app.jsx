@@ -7,7 +7,7 @@ import MyRoutines from "./Components/MyRoutines";
 import Activities from "./Components/Activities";
 import ErrorComponent from "./Components/ErrorComponent";
 import LogIn from "./Components/LogIn";
-import { fetchMe } from "./api/auth";
+import { fetchMe, getActivities } from "./api/auth";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Users from "./Components/Users";
 import NewRoutineForm from "./Components/NewRoutine";
@@ -18,23 +18,28 @@ import CreateActivity from "./Components/CreateActivity";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
+  const [activities, setActivities] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getMe = async () => {
+      const token = localStorage.getItem("token");
+      console.log("This is token", token);
       const data = await fetchMe(token);
+      console.log("This is data", data);
       setUser(data);
+      console.log("This is user line 30", user);
     };
+    const activitiesArr = async () => {
+      const data = await getActivities();
+      setActivities(data);
+    };
+    activitiesArr();
     if (token) {
       getMe();
-      (async () => {
-        const data = await fetchMe(token);
-        setUser(data);
-        navigate("/Users");
-      })();
     }
-  }, []);
+  }, [token]);
 
   return (
     <div>
@@ -48,11 +53,19 @@ function App() {
         <Route path="/routines" element={<Routines token={token} />}></Route>
         <Route
           path="/my_routines"
-          element={<MyRoutines user={user} token={token} />}
+          element={
+            <MyRoutines user={user} token={token} activities={activities} />
+          }
         ></Route>
         <Route
           path="/activities"
-          element={<Activities token={token} />}
+          element={
+            <Activities
+              token={token}
+              activities={activities}
+              setActivities={setActivities}
+            />
+          }
         ></Route>
         <Route path="/Users" element={<Users user={user} />}></Route>
         <Route path="/create_activity" element={<CreateActivity />}></Route>

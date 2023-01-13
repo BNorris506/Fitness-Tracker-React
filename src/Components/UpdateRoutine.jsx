@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { createRoutine, patchRoutine } from "../api/auth";
+import { patchRoutine } from "../api/auth";
 
-const UpdateRoutineForm = ({ token, routineId, myRoutines, setMyRoutines }) => {
+const UpdateRoutineForm = ({
+  token,
+  routineId,
+  myRoutines,
+  setMyRoutines,
+  setRoutineId,
+}) => {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -18,7 +24,15 @@ const UpdateRoutineForm = ({ token, routineId, myRoutines, setMyRoutines }) => {
       );
       setName("");
       setGoal("");
-      setMyRoutines([updatedRoutine, ...myRoutines]);
+      const myEditedRoutines = myRoutines.map((routine) => {
+        if (routine.id === routineId) {
+          return updatedRoutine;
+        } else {
+          return routine;
+        }
+      });
+      setMyRoutines(myEditedRoutines);
+      setRoutineId("");
     } catch (error) {
       console.error(error);
     }
@@ -26,7 +40,7 @@ const UpdateRoutineForm = ({ token, routineId, myRoutines, setMyRoutines }) => {
 
   return (
     <div>
-      <h3>Make a new routine</h3>
+      <h3>Update your routine</h3>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           name="name"
@@ -58,7 +72,7 @@ const UpdateRoutineForm = ({ token, routineId, myRoutines, setMyRoutines }) => {
 
         <br></br>
 
-        <button type="submit">Edit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

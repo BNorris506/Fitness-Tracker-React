@@ -32,6 +32,7 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
           value={name}
           type="text"
           placeholder="name"
+          required
           onChange={(e) => setName(e.target.value)}
         ></input>
 
@@ -42,11 +43,12 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
           value={goal}
           type="text"
           placeholder="goal"
+          required
           onChange={(e) => setGoal(e.target.value)}
         ></input>
 
         <br></br>
-        <p>is public?</p>
+        <label>is public?</label>
         <input
           name="isPublic"
           value={isPublic}

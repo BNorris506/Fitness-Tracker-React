@@ -278,18 +278,27 @@ export const attachActivityToRoutine = async (
   duration
 ) => {
   try {
+    const token = localStorage.getItem("token")
+    const parsedActivityId = parseInt(activityId)
+    const parsedCount = parseInt(count)
+    const parsedDuration = parseInt(duration)
     const response = await fetch(
       `http://fitnesstrac-kr.herokuapp.com/api/routines/${routineId}/activities`,
       {
         method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify({
-          activityId,
-          count,
-          duration,
+          activityId: parsedActivityId,
+          count: parsedCount,
+          duration: parsedDuration,
         }),
       }
     );
     const result = await response.json();
+    console.log("This is results line 293", result)
     return result;
   } catch (error) {
     console.log(error);

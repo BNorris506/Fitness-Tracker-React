@@ -23,6 +23,7 @@ const Routines = ({ token }) => {
     const isPublic = retrieved[0].isPublic;
     console.log("This is happening", token);
     const pushIt = await createRoutine({ token, name, goal, isPublic });
+    console.log("API call", pushIt);
     // return retrieved;
   };
 

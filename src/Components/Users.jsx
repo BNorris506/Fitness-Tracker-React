@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getRoutines, fetchMe } from "../api/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Users = ({ user }) => {
   const [routines, setRoutines] = useState([]);
+  const navigate = useNavigate();
   // console.log("This is the user:", user);
 
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/";
+    navigate("/");
   };
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Users = ({ user }) => {
 
   return (
     <div className="routine_list">
-      <h1>Welcome Back {user?.username}</h1>
+      <h1>Welcome Back, {user?.username}</h1>
       <h2>Are you ready to crush it?!?!?!</h2>
       <Link to="/my_routines">My Routines</Link>
       <Link to="/activities">Activities</Link>

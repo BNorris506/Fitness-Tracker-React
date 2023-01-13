@@ -3,16 +3,7 @@ import { getActivities } from "../api/auth";
 import { Link } from "react-router-dom";
 import NewActivityForm from "./CreateActivity";
 
-const Activities = ({ token }) => {
-  const [activities, setActivities] = useState([]);
-
-  useEffect(() => {
-    const activitiesArr = async () => {
-      const data = await getActivities();
-      setActivities(data);
-    };
-    activitiesArr();
-  }, []);
+const Activities = ({ token, activities, setActivities }) => {
   return (
     <div>
       <h1>Here are the activities</h1>
