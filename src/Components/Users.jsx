@@ -22,13 +22,18 @@ const Users = ({ user }) => {
   // console.log("I'm the routines:", routines);
 
   return (
-    <div className="routine_list">
+    <div className="home">
+      <div className="navbar">
+        <Link to="/my_routines">My Routines</Link>
+        <Link to="/activities">Activities</Link>
+        <Link to="/routines">Routines</Link>
+        <button className="login" onClick={logout}>
+          Log out
+        </button>
+      </div>
       <h1>Welcome Back, {user?.username}</h1>
       <h2>Are you ready to crush it?!?!?!</h2>
-      <Link to="/my_routines">My Routines</Link>
-      <Link to="/activities">Activities</Link>
-      <Link to="/routines">Routines</Link>
-      <button onClick={logout}>Log out</button>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYRAtjqmDhtE28lxYd8x3LgDSu4y_uuUSDUA&usqp=CAU" />
     </div>
   );
 };

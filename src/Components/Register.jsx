@@ -46,7 +46,9 @@ const Register = ({ setToken }) => {
           minLength="8"
           onChange={(e) => setPassword(e.target.value)}
         ></input>
-        <button type="submit">Register</button>
+        <button className="login" type="submit">
+          Register
+        </button>
       </form>
       <div className="links">
         <Link to="/">Home</Link>

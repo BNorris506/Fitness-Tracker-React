@@ -42,45 +42,61 @@ const MyRoutines = ({ user, token, activities }) => {
   };
 
   return (
-    <div>
+    <div className="home">
+      <div className="navbar">
+        <Link to="/Users">Home</Link>
+        <Link to="/activities">Activities</Link>
+        <Link to="/routines">Routines</Link>
+        <button className="login" onClick={logout}>
+          Log out
+        </button>
+      </div>
       <h1>My Routines</h1>
-      {routineId ? (
-        <UpdateRoutineForm
-          token={token}
-          routineId={routineId}
-          myRoutines={myRoutines}
-          setMyRoutines={setMyRoutines}
-          setRoutineId={setRoutineId}
-        />
-      ) : (
-        <NewRoutineForm
-          token={token}
-          myRoutines={myRoutines}
-          setMyRoutines={setMyRoutines}
-          user={user}
-        />
-      )}
-      <Link to="/Users">Home</Link>
-      <Link to="/activities">Activities</Link>
-      <Link to="/routines">Routines</Link>
-      <button onClick={logout}>Log out</button>
-      <div className="myroutine_list">
-        {myRoutines?.map((routine) => (
-          <div key={routine.id}>
-            <p>Name: {routine.name}</p>
-            <p>Goal: {routine.goal}</p>
-            <p>Activities: </p>
-            <button onClick={() => deleteThis(routine.id)}>Delete</button>
-            <button onClick={() => setRoutineId(routine.id)}>Edit</button>
-            <AddActivities
-              activities={activities}
-              routineId={routineId}
-              setRoutineId={setRoutineId}
-              myRoutines={myRoutines}
-            />
-            <br></br>
-          </div>
-        ))}
+      <div className="parent">
+        {routineId ? (
+          <UpdateRoutineForm
+            token={token}
+            routineId={routineId}
+            myRoutines={myRoutines}
+            setMyRoutines={setMyRoutines}
+            setRoutineId={setRoutineId}
+          />
+        ) : (
+          <NewRoutineForm
+            token={token}
+            myRoutines={myRoutines}
+            setMyRoutines={setMyRoutines}
+            user={user}
+          />
+        )}
+        <div className="flex-child routines">
+          {myRoutines?.map((routine) => (
+            <div key={routine.id}>
+              <p>Name: {routine.name}</p>
+              <p>Goal: {routine.goal}</p>
+              <p>Activities: </p>
+              <button
+                className="login danger"
+                onClick={() => deleteThis(routine.id)}
+              >
+                DELETE
+              </button>
+              <button
+                className="login"
+                onClick={() => setRoutineId(routine.id)}
+              >
+                Edit
+              </button>
+              <AddActivities
+                activities={activities}
+                routineId={routineId}
+                setRoutineId={setRoutineId}
+                myRoutines={myRoutines}
+              />
+              <br></br>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

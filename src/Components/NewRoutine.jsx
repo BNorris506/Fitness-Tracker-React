@@ -24,15 +24,16 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
   };
 
   return (
-    <div>
-      <h3>Make a new routine</h3>
+    <div className="flex-child newForm">
+      <h4>Make a new routine</h4>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           name="name"
           value={name}
           type="text"
-          placeholder="name"
+          placeholder="name: "
           required
+          className="input form"
           onChange={(e) => setName(e.target.value)}
         ></input>
 
@@ -42,7 +43,8 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
           name="goal"
           value={goal}
           type="text"
-          placeholder="goal"
+          placeholder="goal: "
+          className="input form"
           required
           onChange={(e) => setGoal(e.target.value)}
         ></input>
@@ -59,7 +61,9 @@ const NewRoutineForm = ({ token, myRoutines, setMyRoutines }) => {
 
         <br></br>
 
-        <button type="submit">Submit</button>
+        <button className="login submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

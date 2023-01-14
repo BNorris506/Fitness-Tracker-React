@@ -14,7 +14,7 @@ import NewRoutineForm from "./Components/NewRoutine";
 import GuestRoutines from "./Components/Guest/GuestRoutines";
 import GuestActivities from "./Components/Guest/GuestActivities";
 import GuestHome from "./Components/Guest/GuestHome";
-import CreateActivity from "./Components/CreateActivity";
+import CreateActivity from "./Components/NewActivityForm";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));

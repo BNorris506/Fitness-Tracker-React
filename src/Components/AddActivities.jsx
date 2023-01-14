@@ -27,7 +27,9 @@ const AddActivities = ({ activities, setRoutineId, myRoutines, routineId }) => {
 
   return (
     <div>
-      <button onClick={(e) => handleClick(e)}>Add Activities</button>
+      <button className="login submit" onClick={(e) => handleClick(e)}>
+        Add Activities
+      </button>
       {click &&
         activities.map((activity) => (
           <form key={activity.id} onSubmit={(e) => handleSubmit(e)}>
@@ -55,7 +57,11 @@ const AddActivities = ({ activities, setRoutineId, myRoutines, routineId }) => {
               }}
             ></input>
             <br></br>
-            <button type="submit" onClick={() => setActivityId(activity.id)}>
+            <button
+              className="login"
+              type="submit"
+              onClick={() => setActivityId(activity.id)}
+            >
               Add to Routine
             </button>
           </form>

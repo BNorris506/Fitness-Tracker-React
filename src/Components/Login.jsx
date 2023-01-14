@@ -61,7 +61,9 @@ const LogIn = ({ setToken }) => {
           maxLength="12"
           onChange={(event) => setTestPassword(event.target.value)}
         ></input>
-        <button type="submit">Login</button>
+        <button className="login" type="submit">
+          Login
+        </button>
       </form>
     </div>
   );

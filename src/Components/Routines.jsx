@@ -33,11 +33,15 @@ const Routines = ({ token }) => {
   };
 
   return (
-    <div>
-      <Link to="/Users">Home</Link>
-      <Link to="/my_routines">My Routines</Link>
-      <Link to="/activities">Activities</Link>
-      <button onClick={logout}>Log out</button>
+    <div className="home">
+      <div className="navbar">
+        <Link to="/Users">Home</Link>
+        <Link to="/my_routines">My Routines</Link>
+        <Link to="/activities">Activities</Link>
+        <button className="login" onClick={logout}>
+          Log out
+        </button>
+      </div>
       {routines.map((routine) => (
         <div key={routine.id} className="routine_list">
           <p>Name: {routine.name}</p>
@@ -54,9 +58,7 @@ const Routines = ({ token }) => {
               <p>Duration: {activity.duration}</p>
             </div>
           ))}
-          <p>
-            <button onClick={() => addThis(routine.id)}>Add Routine</button>
-          </p>
+          <button onClick={() => addThis(routine.id)}>Add Routine</button>
           <br></br>
         </div>
       ))}

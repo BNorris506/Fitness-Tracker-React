@@ -30,14 +30,16 @@ const NewActivityForm = ({ token, activities, setActivities }) => {
   };
 
   return (
-    <div>
-      <h3>Make a new activity</h3>
+    <div className="flex-child newForm">
+      <h4>Make a new activity</h4>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           name="name"
           value={name}
           type="text"
+          required
           placeholder="name"
+          className="input form"
           onChange={(e) => setName(e.target.value)}
         ></input>
 
@@ -47,12 +49,16 @@ const NewActivityForm = ({ token, activities, setActivities }) => {
           name="description"
           value={description}
           type="text"
+          required
           placeholder="description"
+          className="input form"
           onChange={(e) => setDescription(e.target.value)}
         ></input>
         <br></br>
 
-        <button type="submit">Submit</button>
+        <button className="login submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

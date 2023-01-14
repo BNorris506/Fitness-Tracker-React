@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { patchRoutine } from "../api/auth";
 
 const UpdateRoutineForm = ({
@@ -11,6 +11,8 @@ const UpdateRoutineForm = ({
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
+  const [thisRoutine, setThisRoutine] = useState("");
+  const [thisGoal, setThisGoal] = useState("");
 
   const handleSubmit = async (e) => {
     try {
@@ -38,15 +40,29 @@ const UpdateRoutineForm = ({
     }
   };
 
+  useEffect(() => {
+    const getThisRoutine = () => {
+      myRoutines.filter((routine) => {
+        if (routine.id === routineId) {
+          console.log("routine name", routine.name);
+          setThisRoutine(routine.name);
+          setThisGoal(routine.goal);
+        }
+      });
+    };
+    getThisRoutine();
+  });
+
   return (
-    <div>
-      <h3>Update your routine</h3>
+    <div className="flex-child newForm">
+      <h4 className="update">Update your routine</h4>
       <form onSubmit={(e) => handleSubmit(e)}>
         <input
           name="name"
           value={name}
           type="text"
-          placeholder="name"
+          className="input form"
+          placeholder={thisRoutine}
           onChange={(e) => setName(e.target.value)}
         ></input>
 
@@ -56,12 +72,13 @@ const UpdateRoutineForm = ({
           name="goal"
           value={goal}
           type="text"
-          placeholder="goal"
+          className="input form"
+          placeholder={thisGoal}
           onChange={(e) => setGoal(e.target.value)}
         ></input>
 
         <br></br>
-        <p>is public?</p>
+        <label>is public?</label>
         <input
           name="isPublic"
           value={isPublic}
@@ -72,7 +89,9 @@ const UpdateRoutineForm = ({
 
         <br></br>
 
-        <button type="submit">Submit</button>
+        <button className="login submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

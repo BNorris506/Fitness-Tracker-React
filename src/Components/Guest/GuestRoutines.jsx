@@ -15,8 +15,13 @@ const GuestRoutines = () => {
   // console.log("I'm the routines:", routines);
 
   return (
-    <div>
-      <Link to="/guest">Home</Link>
+    <div className="home">
+      <div className="navbar">
+        <Link to="/guest">Home</Link>
+        <Link to="/guestActivities">Activities</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/">Log In</Link>
+      </div>
       {routines.map((routine) => (
         <div key={routine.id} className="routine_list">
           <p>Name: {routine.name}</p>

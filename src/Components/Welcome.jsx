@@ -9,9 +9,7 @@ const Welcome = ({ setToken }) => {
       <h2> to Fitness Tracker</h2>
       <LogIn setToken={setToken} />
       <div className="links">
-        <Link to="/register" className="login">
-          New? Register here!
-        </Link>
+        <Link to="/register">New? Register here!</Link>
         <Link to="/guest">Continue as guest</Link>
       </div>
     </div>
