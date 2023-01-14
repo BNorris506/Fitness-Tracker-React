@@ -52,6 +52,10 @@ button:hover{
   margin-top: 30px; 
   border: 1px solid black; 
   font-size: 120%;
+  width: 450px; 
+  position: relative; 
+  left: 380px; 
+  top: 50px; 
 }
 
 ol{
