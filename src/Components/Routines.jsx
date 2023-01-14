@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getRoutineByActivityId, getRoutines } from "../api/auth";
-import { Link } from "react-router-dom";
-import MyRoutines from "../Components/MyRoutines";
+import { getRoutines } from "../api/auth";
+import { Link, useNavigate } from "react-router-dom";
 import { createRoutine } from "../api/auth";
 
 const Routines = ({ token }) => {
   const [routines, setRoutines] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const routinesArr = async () => {
@@ -14,6 +14,11 @@ const Routines = ({ token }) => {
     };
     routinesArr();
   }, [routines]);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const addThis = async (routineId) => {
     const retrieved = routines.filter((routine) => routine.id == routineId);
@@ -32,6 +37,7 @@ const Routines = ({ token }) => {
       <Link to="/Users">Home</Link>
       <Link to="/my_routines">My Routines</Link>
       <Link to="/activities">Activities</Link>
+      <button onClick={logout}>Log out</button>
       {routines.map((routine) => (
         <div key={routine.id} className="routine_list">
           <p>Name: {routine.name}</p>

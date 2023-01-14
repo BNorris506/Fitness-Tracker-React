@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getRoutinesByUsername } from "../api/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NewRoutineForm from "../Components/NewRoutine";
 import { deleteRoutine } from "../api/auth";
 import UpdateRoutineForm from "./UpdateRoutine";
@@ -9,6 +9,7 @@ import AddActivities from "./AddActivities";
 const MyRoutines = ({ user, token, activities }) => {
   const [myRoutines, setMyRoutines] = useState([]);
   const [routineId, setRoutineId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const myRoutinesArr = async () => {
@@ -24,6 +25,11 @@ const MyRoutines = ({ user, token, activities }) => {
     };
     myRoutinesArr();
   }, []);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   const deleteThis = async (routineId) => {
     const result = await deleteRoutine(token, routineId);
@@ -57,6 +63,7 @@ const MyRoutines = ({ user, token, activities }) => {
       <Link to="/Users">Home</Link>
       <Link to="/activities">Activities</Link>
       <Link to="/routines">Routines</Link>
+      <button onClick={logout}>Log out</button>
       <div className="myroutine_list">
         {myRoutines?.map((routine) => (
           <div key={routine.id}>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getRoutines, fetchMe } from "../api/auth";
+import { getRoutines } from "../api/auth";
 import { Link, useNavigate } from "react-router-dom";
 
 const Users = ({ user }) => {
