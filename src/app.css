@@ -1,10 +1,70 @@
-* {
-  background-color: ;
-}
-
 #root {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
   text-align: center;
 }
+
+*{
+  background-color:lightslategrey;
+  color:white
+}
+
+.input::placeholder{
+  color: white; 
+}
+
+.links{
+  display: flex; 
+  justify-content: center;
+  padding: 1rem; 
+  gap: 3rem; 
+}
+
+.input{
+ margin-right: 1rem; 
+ padding: 5px; 
+ border: 1px solid black; 
+ border-radius: 3px;
+ width: 130px; 
+}
+
+button{
+  padding-top: 8px; 
+  padding-bottom: 8px; 
+  padding-left: 15px; 
+  padding-right: 15px; 
+  border-radius: 5px;
+  margin-left: 10px; 
+  border: 1px solid black;
+}
+
+button:hover{
+  font-size: 16px;
+  box-shadow: 5px 5px 5px  black;
+}
+
+.listContainer{
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px; 
+  border: 1px solid black; 
+}
+
+ol{
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem; 
+
+}
+
+h3{
+  text-decoration: underline;
+  margin-bottom: -5px; 
+}
+
+

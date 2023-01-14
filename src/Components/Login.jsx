@@ -36,6 +36,7 @@ const LogIn = ({ setToken }) => {
           value={username}
           type="text"
           placeholder="username"
+          className="input"
           onChange={(event) => setUsername(event.target.value)}
         ></input>
         <input
@@ -44,6 +45,7 @@ const LogIn = ({ setToken }) => {
           value={password}
           type="password"
           placeholder="password"
+          className="input"
           minLength="8"
           maxLength="12"
           onChange={(event) => setPassword(event.target.value)}
@@ -54,6 +56,7 @@ const LogIn = ({ setToken }) => {
           value={testPassword}
           type="password"
           placeholder="confirmPassword"
+          className="input"
           minLength="8"
           maxLength="12"
           onChange={(event) => setTestPassword(event.target.value)}
