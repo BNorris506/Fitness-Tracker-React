@@ -10,6 +10,7 @@ const MyRoutines = ({ user, token, activities }) => {
   const [myRoutines, setMyRoutines] = useState([]);
   const [routineId, setRoutineId] = useState("");
   const navigate = useNavigate();
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const myRoutinesArr = async () => {
@@ -69,7 +70,10 @@ const MyRoutines = ({ user, token, activities }) => {
             user={user}
           />
         )}
-        <div className="flex-child routines">
+        <div
+          style={{ marginLeft: isActive ? "37px" : "" }}
+          className="flex-child routines"
+        >
           {myRoutines?.map((routine) => (
             <div key={routine.id}>
               <p>Name: {routine.name}</p>
@@ -88,6 +92,8 @@ const MyRoutines = ({ user, token, activities }) => {
                 Edit
               </button>
               <AddActivities
+                setIsActive={setIsActive}
+                isActive={isActive}
                 activities={activities}
                 routineId={routineId}
                 setRoutineId={setRoutineId}

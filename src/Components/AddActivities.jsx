@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { attachActivityToRoutine } from "../api/auth";
 
-const AddActivities = ({ activities, setRoutineId, myRoutines, routineId }) => {
+const AddActivities = ({
+  activities,
+  setRoutineId,
+  myRoutines,
+  routineId,
+  isActive,
+  setIsActive,
+}) => {
   const [click, setClick] = useState(false);
   const [count, setCount] = useState("");
   const [duration, setDuration] = useState("");
   const [activityId, setActivityId] = useState("");
+  //   const [isActive, setIsActive] = useState(false);
 
   const handleSubmit = async (e) => {
     try {
@@ -17,6 +25,7 @@ const AddActivities = ({ activities, setRoutineId, myRoutines, routineId }) => {
   };
 
   const handleClick = (e) => {
+    setIsActive((current) => !current);
     myRoutines.map((routine) => {
       routine.id;
       setRoutineId(routine.id);
@@ -30,42 +39,46 @@ const AddActivities = ({ activities, setRoutineId, myRoutines, routineId }) => {
       <button className="login submit" onClick={(e) => handleClick(e)}>
         Add Activities
       </button>
-      {click &&
-        activities.map((activity) => (
-          <form key={activity.id} onSubmit={(e) => handleSubmit(e)}>
-            <p>Name: {activity.name}</p>
-            <p>Description: {activity.description}</p>
-            <label>Count: {activity.count}</label>
-            <input
-              name="count"
-              type="text"
-              value={count}
-              onChange={(e) => {
-                setCount(e.target.value);
-                console.log(count);
-              }}
-            ></input>
-            <br></br>
-            <label>Duration: {activity.duration}</label>
-            <input
-              name="duration"
-              type="text"
-              value={duration}
-              onChange={(e) => {
-                setDuration(e.target.value);
-                console.log(duration);
-              }}
-            ></input>
-            <br></br>
-            <button
-              className="login"
-              type="submit"
-              onClick={() => setActivityId(activity.id)}
-            >
-              Add to Routine
-            </button>
-          </form>
-        ))}
+      <div>
+        {click &&
+          activities.map((activity) => (
+            <form key={activity.id} onSubmit={(e) => handleSubmit(e)}>
+              <p>Name: {activity.name}</p>
+              <p>Description: {activity.description}</p>
+              <label>Count: {activity.count}</label>
+              <input
+                name="count"
+                type="text"
+                value={count}
+                className="input form"
+                onChange={(e) => {
+                  setCount(e.target.value);
+                  console.log(count);
+                }}
+              ></input>
+              <br></br>
+              <label>Duration: {activity.duration}</label>
+              <input
+                name="duration"
+                type="text"
+                value={duration}
+                className="input form"
+                onChange={(e) => {
+                  setDuration(e.target.value);
+                  console.log(duration);
+                }}
+              ></input>
+              <br></br>
+              <button
+                className="login"
+                type="submit"
+                onClick={() => setActivityId(activity.id)}
+              >
+                Add to Routine
+              </button>
+            </form>
+          ))}
+      </div>
     </div>
   );
 };
