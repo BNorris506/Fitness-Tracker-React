@@ -18,19 +18,26 @@ const AddActivities = ({
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      attachActivityToRoutine(routineId, activityId, count, duration);
+      const newRoutine = attachActivityToRoutine(
+        routineId,
+        activityId,
+        count,
+        duration
+      );
+      console.log("This is new Routine", newRoutine);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleClick = (e) => {
+    e.preventDefault();
     setIsActive((current) => !current);
-    myRoutines.map((routine) => {
-      routine.id;
-      setRoutineId(routine.id);
-      console.log("I'm the Id", routineId);
+    const myArr = myRoutines.map((routine) => {
+      routine;
     });
+    //   setRoutineId(routine.id);
+    console.log("I'm the Id", routineId);
     setClick(!click);
   };
 

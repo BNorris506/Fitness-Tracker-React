@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getRoutinesByUsername } from "../api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import NewRoutineForm from "../Components/NewRoutine";
-import { deleteRoutine } from "../api/auth";
+import { deleteRoutine, deleteRoutineActivity } from "../api/auth";
 import UpdateRoutineForm from "./UpdateRoutine";
 import AddActivities from "./AddActivities";
 
@@ -42,6 +42,17 @@ const MyRoutines = ({ user, token, activities }) => {
     }
   };
 
+  const deleteThisActivity = async (routineActivityId) => {
+    const token = localStorage.getItem("token");
+    const result = await deleteRoutineActivity(routineActivityId, token);
+    if (result) {
+      const myNewActivities = myRoutines?.filter(
+        (activity) => activity.id !== routineActivityId
+      );
+      setMyRoutines(myNewActivities);
+    }
+  };
+
   return (
     <div className="home">
       <div className="navbar">
@@ -78,7 +89,24 @@ const MyRoutines = ({ user, token, activities }) => {
             <div key={routine.id}>
               <p>Name: {routine.name}</p>
               <p>Goal: {routine.goal}</p>
-              <p>Activities: </p>
+              {routine.activities?.map((activity) => (
+                <div key={activity.id}>
+                  <button
+                    className="login danger"
+                    onClick={() => deleteThisActivity(activity.id)}
+                  >
+                    Delete Activity
+                  </button>
+                  <p>
+                    <strong>Activity</strong>
+                  </p>
+                  <p>Name: {activity.name}</p>
+                  <p>Description: {activity.description}</p>
+                  <p>Count: {activity.count}</p>
+                  <p>Duration: {activity.duration}</p>
+                </div>
+              ))}
+
               <button
                 className="login danger"
                 onClick={() => deleteThis(routine.id)}
